@@ -1,7 +1,7 @@
-package com.example.SpringWorkshop.users.jpa;
+package com.example.springworkshop.users.jpa;
 
-import com.example.SpringWorkshop.users.model.Users;
-import com.example.SpringWorkshop.users.repository.UsersJPARepository;
+import com.example.springworkshop.users.model.Users;
+import com.example.springworkshop.users.repository.UsersJPARepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

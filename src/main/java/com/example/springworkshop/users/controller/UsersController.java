@@ -1,7 +1,7 @@
-package com.example.SpringWorkshop.users.controller;
+package com.example.springworkshop.users.controller;
 
-import com.example.SpringWorkshop.users.model.Users;
-import com.example.SpringWorkshop.users.repository.UsersJPARepository;
+import com.example.springworkshop.users.model.Users;
+import com.example.springworkshop.users.repository.UsersJPARepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

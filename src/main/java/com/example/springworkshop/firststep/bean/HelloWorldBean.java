@@ -1,4 +1,4 @@
-package com.example.SpringWorkshop.firststep.bean;
+package com.example.springworkshop.firststep.bean;
 
 public class HelloWorldBean {
 

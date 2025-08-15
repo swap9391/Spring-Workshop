@@ -1,6 +1,6 @@
-package com.example.SpringWorkshop.firststep;
+package com.example.springworkshop.firststep;
 
-import com.example.SpringWorkshop.firststep.bean.HelloWorldBean;
+import com.example.springworkshop.firststep.bean.HelloWorldBean;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

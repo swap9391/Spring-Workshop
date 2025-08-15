@@ -1,4 +1,4 @@
-package com.example.SpringWorkshop.users.model;
+package com.example.springworkshop.users.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

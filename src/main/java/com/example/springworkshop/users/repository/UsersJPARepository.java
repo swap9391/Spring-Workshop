@@ -1,11 +1,9 @@
-package com.example.SpringWorkshop.users.repository;
+package com.example.springworkshop.users.repository;
 
-import com.example.SpringWorkshop.users.model.Users;
+import com.example.springworkshop.users.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
 
 
 public interface UsersJPARepository extends JpaRepository<Users,Long> {
