@@ -1,4 +1,4 @@
-package com.example.springworkshop.users.model;
+package com.example.springworkshop.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,16 +11,18 @@ public class Users {
     private String name;
     private String email;
     private String password;
+    private String role;
 
     public Users() {
     }
 
-    public Users(long id, String name, String email, String password) {
+    public Users(long id, String name, String email, String password, String role) {
         super();
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public long getId() {
@@ -55,6 +57,14 @@ public class Users {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
@@ -62,6 +72,7 @@ public class Users {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package com.example.springworkshop.watertracker.model;
+package com.example.springworkshop.model;
 
 import jakarta.persistence.*;
 

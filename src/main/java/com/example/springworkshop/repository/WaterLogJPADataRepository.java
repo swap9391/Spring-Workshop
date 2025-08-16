@@ -1,6 +1,6 @@
-package com.example.springworkshop.watertracker.repository;
+package com.example.springworkshop.repository;
 
-import com.example.springworkshop.watertracker.model.WaterLogModel;
+import com.example.springworkshop.model.WaterLogModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;

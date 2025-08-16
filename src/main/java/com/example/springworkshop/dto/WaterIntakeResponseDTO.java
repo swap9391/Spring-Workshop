@@ -1,7 +1,4 @@
-package com.example.springworkshop.watertracker.dto;
-
-import java.time.LocalDate;
-import java.util.List;
+package com.example.springworkshop.dto;
 
 public class WaterIntakeResponseDTO {
     private Long createdTime;

@@ -1,18 +1,18 @@
-package com.example.springworkshop.watertracker.controller;
+package com.example.springworkshop.controller;
 
-import com.example.springworkshop.watertracker.dto.WaterIntakeResponseDTO;
-import com.example.springworkshop.watertracker.dto.WaterLogResponseDTO;
-import com.example.springworkshop.watertracker.model.WaterLogModel;
-import com.example.springworkshop.watertracker.repository.WaterLogJPADataRepository;
+import com.example.springworkshop.dto.WaterIntakeResponseDTO;
+import com.example.springworkshop.dto.WaterLogResponseDTO;
+import com.example.springworkshop.model.WaterLogModel;
+import com.example.springworkshop.repository.WaterLogJPADataRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/water-tracker")
@@ -26,7 +26,11 @@ public class WaterTrackerController {
     }
 
     @RequestMapping(value = "/add-water-log", method = RequestMethod.POST)
-    ResponseEntity<Object> addWaterLog(@RequestBody WaterLogModel waterLogModel) {
+    ResponseEntity<Object> addWaterLog(@RequestBody WaterLogModel waterLogModel, Authentication authentication) {
+
+        // Get username/email of the logged-in user
+        String currentUserEmail = authentication.getName();
+
 
         LocalDate requestDate = waterLogModel.getDateOfTracking();
         long now = System.currentTimeMillis();
@@ -38,7 +42,7 @@ public class WaterTrackerController {
         if (existingLog != null) {
             saved = updateWaterTrackingEntriesToSameDate(waterLogModel, now, existingLog);
         } else {
-            saved = createWaterEntryWithUniqueDate(waterLogModel, now);
+            saved = createWaterEntryWithUniqueDate(waterLogModel, now,currentUserEmail);
         }
 
         // Map to Response DTO
@@ -58,17 +62,16 @@ public class WaterTrackerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    private WaterLogModel createWaterEntryWithUniqueDate(WaterLogModel waterLogModel, long now) {
+    private WaterLogModel createWaterEntryWithUniqueDate(WaterLogModel waterLogModel, long now, String currentUserEmail) {
         WaterLogModel saved;
         waterLogModel.setCreatedTime(now);
         waterLogModel.setUpdatedTime(now);
+        waterLogModel.setCreatedBy(currentUserEmail);
 
         if (waterLogModel.getWaterTrackingEntries() == null) {
             waterLogModel.setWaterTrackingEntries(new ArrayList<>());
         } else {
-            waterLogModel.getWaterTrackingEntries().forEach(entry -> {
-                entry.setCreatedTime(now);
-            });
+            waterLogModel.getWaterTrackingEntries().forEach(entry -> entry.setCreatedTime(now));
         }
 
         waterLogModel.getWaterTrackingEntries().forEach(entry -> entry.setWaterLogModel(waterLogModel));

@@ -1,7 +1,7 @@
-package com.example.springworkshop.users.controller;
+package com.example.springworkshop.controller;
 
-import com.example.springworkshop.users.model.Users;
-import com.example.springworkshop.users.repository.UsersJPARepository;
+import com.example.springworkshop.model.Users;
+import com.example.springworkshop.repository.UsersJPARepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,18 +32,6 @@ public class UsersController {
     @RequestMapping("/{id}")
     public Optional<Users> retrieveAllUsers(@PathVariable long id){
         return usersJPARepository.findById(id);
-    }
-
-    @RequestMapping("/get-user/{email}/{password}")
-    public Users retrieveAllUsers(@PathVariable String email,@PathVariable String password){
-        Users users = usersJPARepository.findUserByEmailAndPassword(email, password);
-        if (users == null) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "User not found with the provided email and password"
-            );
-        }
-        return users;
     }
 
     @RequestMapping("/remove-user/{id}")

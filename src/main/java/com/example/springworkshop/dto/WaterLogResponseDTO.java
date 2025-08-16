@@ -1,4 +1,4 @@
-package com.example.springworkshop.watertracker.dto;
+package com.example.springworkshop.dto;
 
 import java.time.LocalDate;
 import java.util.List;
