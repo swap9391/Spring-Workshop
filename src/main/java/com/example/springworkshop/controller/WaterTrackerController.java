@@ -49,7 +49,7 @@ public class WaterTrackerController {
     *
     * */
 
-    @RequestMapping(value = "/add-water-log", method = RequestMethod.POST)
+    @PostMapping(value = "/add-water-log")
     ResponseEntity<Object> addWaterLog(@RequestBody WaterLogModel waterLogModel, Authentication authentication) {
 
         // Get username/email of the logged-in user
@@ -118,7 +118,7 @@ public class WaterTrackerController {
         return saved;
     }
 
-    @RequestMapping(value = "/fetch-all-water-log", method = RequestMethod.GET)
+    @GetMapping(value = "/fetch-all-water-log")
     ResponseEntity<Object> fetchAllWaterLog() {
 
         List<WaterLogResponseDTO> logs = waterLogJPADataRepository.findAll()
@@ -140,7 +140,7 @@ public class WaterTrackerController {
         return ResponseEntity.ok(logs);
     }
 
-    @RequestMapping(value = "/fetch-water-log/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/fetch-water-log/{id}")
     ResponseEntity<Object> fetchAllWaterLogById(@PathVariable long id) {
         WaterLogResponseDTO logs = waterLogJPADataRepository.findById(id)
                 .map(log -> new WaterLogResponseDTO(
@@ -156,7 +156,7 @@ public class WaterTrackerController {
         return ResponseEntity.ok(logs);
     }
 
-    @RequestMapping("/remove-water-log/{id}")
+    @DeleteMapping("/remove-water-log/{id}")
     public ResponseEntity<Object> deleteWaterLogById(@PathVariable long id){
 
         if (!waterLogJPADataRepository.existsById(id)) {

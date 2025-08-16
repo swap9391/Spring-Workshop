@@ -2,7 +2,9 @@ package com.example.springworkshop.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.hibernate.annotations.DynamicUpdate;
 
+@DynamicUpdate
 @Entity
 public class Users {
 
