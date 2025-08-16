@@ -1,4 +1,4 @@
-package com.example.springworkshop.datainit;
+package com.example.springworkshop.config;
 
 import com.example.springworkshop.model.Users;
 import com.example.springworkshop.repository.UsersJPARepository;
