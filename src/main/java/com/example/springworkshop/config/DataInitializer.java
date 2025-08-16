@@ -21,8 +21,8 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        usersJPARepository.save(new Users(1,"Swapnil Jadhav","swapnil.jadhav@gmail.com",passwordEncoder.encode("Test1234") ,"ADMIN"));
-        usersJPARepository.save(new Users(2,"Tom Hanks","tom.hanks@gmail.com",passwordEncoder.encode("Test1234"),"USER"));
-        usersJPARepository.save(new Users(3,"Jonny Depp","jonny.depp@gmail.com",passwordEncoder.encode("Test1234"),"USER"));
+        usersJPARepository.save(new Users("Swapnil Jadhav","swapnil.jadhav@gmail.com",passwordEncoder.encode("Test1234") ,"ADMIN"));
+        usersJPARepository.save(new Users("Tom Hanks","tom.hanks@gmail.com",passwordEncoder.encode("Test1234"),"USER"));
+        usersJPARepository.save(new Users("Jonny Depp","jonny.depp@gmail.com",passwordEncoder.encode("Test1234"),"USER"));
     }
 }

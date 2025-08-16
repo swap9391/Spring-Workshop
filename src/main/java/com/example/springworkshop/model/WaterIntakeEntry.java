@@ -19,8 +19,7 @@ public class WaterIntakeEntry {
     @JoinColumn(name = "water_log_id", nullable = false)
     private WaterLogModel waterLogModel;
 
-    public WaterIntakeEntry(Long id, Long createdTime, Double qty, WaterLogModel waterLogModel) {
-        this.id = id;
+    public WaterIntakeEntry( Long createdTime, Double qty, WaterLogModel waterLogModel) {
         this.createdTime = createdTime;
         this.qty = qty;
         this.waterLogModel = waterLogModel;

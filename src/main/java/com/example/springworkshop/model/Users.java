@@ -1,6 +1,8 @@
 package com.example.springworkshop.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -9,7 +11,9 @@ import org.hibernate.annotations.DynamicUpdate;
 public class Users {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String name;
     private String email;
     private String password;
@@ -21,6 +25,14 @@ public class Users {
     public Users(long id, String name, String email, String password, String role) {
         super();
         this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    // Convenience constructor without ID (Hibernate will generate it)
+    public Users(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
