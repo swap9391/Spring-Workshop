@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/water-tracker")
@@ -112,6 +113,22 @@ public class WaterTrackerController {
         return ResponseEntity.ok(logs);
     }
 
+    @RequestMapping(value = "/fetch-water-log/{id}", method = RequestMethod.GET)
+    ResponseEntity<Object> fetchAllWaterLogById(@PathVariable long id) {
+        WaterLogResponseDTO logs = waterLogJPADataRepository.findById(id)
+                .map(log -> new WaterLogResponseDTO(
+                        log.getId(),
+                        log.getDateOfTracking(),
+                        log.getCreatedBy(),
+                        log.getWaterTrackingEntries()
+                                .stream()
+                                .map(e -> new WaterIntakeResponseDTO(e.getCreatedTime(), e.getQty()))
+                                .toList()
+                )) .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Water log not found with id " + id));
+        return ResponseEntity.ok(logs);
+    }
+
     @RequestMapping("/remove-water-log/{id}")
     public ResponseEntity<Object> deleteWaterLogById(@PathVariable long id){
 
@@ -125,5 +142,7 @@ public class WaterTrackerController {
         waterLogJPADataRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+
 
 }
