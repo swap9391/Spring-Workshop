@@ -25,6 +25,30 @@ public class WaterTrackerController {
         this.waterLogJPADataRepository = waterLogJPADataRepository;
     }
 
+
+
+    /*Adds a new water log entry
+    *
+    * createdBy mapped with authenticated user
+    * dateOfTracking mapped oneToMany relation between waterTrackingEntries
+    * WaterIntakeEntry has annotation  @OneToMany(mappedBy = "waterLogModel", cascade = CascadeType.ALL, orphanRemoval = true)
+    * Which will delete all child automatically if parent has deleted
+    * if record already present for the date waterTrackingEntries keep adding the data to the same date
+    * * {
+        "createdBy": "swapnil.jadhav@gmail.com",
+        "dateOfTracking": "2025-08-16",
+        "waterTrackingEntries": [
+        {
+            "qty": 240
+         },
+        {
+            "qty": 300
+        }
+       ]
+    }
+    *
+    * */
+
     @RequestMapping(value = "/add-water-log", method = RequestMethod.POST)
     ResponseEntity<Object> addWaterLog(@RequestBody WaterLogModel waterLogModel, Authentication authentication) {
 
