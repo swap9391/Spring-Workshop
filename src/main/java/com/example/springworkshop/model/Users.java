@@ -17,25 +17,28 @@ public class Users {
     private String name;
     private String email;
     private String password;
+    private String mobileNumber;
     private String role;
 
     public Users() {
     }
 
-    public Users(long id, String name, String email, String password, String role) {
+    public Users(long id, String name, String email, String password,String mobileNumber, String role) {
         super();
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.mobileNumber = mobileNumber;
         this.role = role;
     }
 
     // Convenience constructor without ID (Hibernate will generate it)
-    public Users(String name, String email, String password, String role) {
+    public Users(String name, String email, String password,String mobileNumber, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.mobileNumber = mobileNumber;
         this.role = role;
     }
 
@@ -79,6 +82,14 @@ public class Users {
         this.role = role;
     }
 
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
@@ -86,6 +97,7 @@ public class Users {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }

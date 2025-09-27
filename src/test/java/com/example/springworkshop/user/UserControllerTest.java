@@ -34,8 +34,8 @@ public class UserControllerTest {
     void testRetrieveAllUsers_endpointReturnsUsers() throws Exception{
 
         List<Users> users = new ArrayList<>();
-        users.add(new Users("Alice", "alice@example.com", "pass", "USER"));
-        users.add(new Users( "Bob", "bob@example.com", "pass", "ADMIN"));
+        users.add(new Users("Alice", "alice@example.com", "pass","0000000000", "USER"));
+        users.add(new Users( "Bob", "bob@example.com", "pass","0000000000", "ADMIN"));
         usersJPARepository.deleteAll();
         usersJPARepository.saveAll(users);
 

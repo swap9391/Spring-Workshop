@@ -1,14 +1,19 @@
 package com.example.springworkshop.controller;
 
+import com.example.springworkshop.dto.UserAddRequestDTO;
 import com.example.springworkshop.dto.UserUpdateDTO;
 import com.example.springworkshop.model.Users;
 import com.example.springworkshop.repository.UsersJPARepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -16,12 +21,15 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UsersController {
 
-    public UsersController(UsersJPARepository usersJPARepository) {
+    UsersJPARepository usersJPARepository;
+    PasswordEncoder passwordEncoder;
+
+
+    public UsersController(UsersJPARepository usersJPARepository, PasswordEncoder passwordEncoder) {
         super();
         this.usersJPARepository = usersJPARepository;
+        this.passwordEncoder = passwordEncoder;
     }
-
-    UsersJPARepository usersJPARepository;
 
     @GetMapping("/all-users")
     public List<Users> retrieveAllUsers(){
@@ -61,6 +69,23 @@ public class UsersController {
         })            .orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "User with ID " + id + " not found"));
 
+    }
+
+    @PostMapping("/add-user")
+    public ResponseEntity<Object> addUser(@RequestBody UserAddRequestDTO userDTO) {
+        Users newUser = new Users();
+        newUser.setName(userDTO.getName());
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        newUser.setMobileNumber(userDTO.getMobileNumber());
+        newUser.setRole(userDTO.getRole());
+        usersJPARepository.save(newUser);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "User created successfully");
+        response.put("timestamp", LocalDateTime.now());
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
 }
